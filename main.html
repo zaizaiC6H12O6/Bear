@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teman Emoh | Polar Bears</title>
+
+  <style>
+    :root {
+      --navy: #082f49;
+      --blue: #0ea5e9;
+      --ice: #e0f2fe;
+      --white: #ffffff;
+      --dark: #102a43;
+      --muted: #52728b;
+      --sky: #7dd3fc;
+      --glow: rgba(125, 211, 252, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background:
+        radial-gradient(circle at top, rgba(125, 211, 252, 0.22), transparent 30%),
+        #f7fcff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      min-height: 100vh;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(4, 35, 55, 0.86), rgba(14, 165, 233, 0.28)),
+        url("https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=2000&q=85")
+        center/cover;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.75;
+      animation: float 12s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    header::before {
+      width: 420px;
+      height: 420px;
+      background: rgba(125, 211, 252, 0.18);
+      top: -100px;
+      right: -80px;
+    }
+
+    header::after {
+      width: 340px;
+      height: 340px;
+      background: rgba(255, 255, 255, 0.08);
+      bottom: -70px;
+      left: -50px;
+      animation-delay: 1.5s;
+    }
+
+    nav {
+      width: min(1120px, 90%);
+      margin: auto;
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: slideInDown 0.9s ease both;
+    }
+
+    .logo span {
+      color: #7dd3fc;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav a {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 100%;
+      height: 2px;
+      background: var(--sky);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #c8f1ff;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      width: min(1120px, 90%);
+      margin: 14vh auto 0;
+      max-width: 760px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      line-height: 0.92;
+      margin-bottom: 22px;
+      letter-spacing: -0.06em;
+      text-shadow: 0 8px 28px rgba(8, 47, 73, 0.28);
+    }
+
+    .hero p {
+      font-size: 1.17rem;
+      max-width: 600px;
+      margin-bottom: 32px;
+      color: #e0f2fe;
+      line-height: 1.7;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 18px 35px rgba(2, 132, 199, 0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.45) 48%, transparent 100%);
+      transform: translateX(-130%);
+      transition: transform 0.6s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 22px 40px rgba(2, 132, 199, 0.48);
+      filter: brightness(1.06);
+    }
+
+    .button:hover::before {
+      transform: translateX(130%);
+    }
+
+    .scroll-note {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      color: #dff6ff;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    section {
+      padding: 100px 5%;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 52px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .section-title h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.05em;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .about {
+      width: min(1100px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      transform: translateY(0);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      inset: 14px -18px -18px 14px;
+      background: linear-gradient(135deg, rgba(14,165,233,0.16), rgba(8,47,73,0.05));
+      border-radius: 26px;
+      z-index: -1;
+    }
+
+    .about img {
+      width: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      border-radius: 26px;
+      box-shadow: 0 24px 50px rgba(8, 47, 73, 0.18);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about img:hover {
+      transform: scale(1.01);
+      box-shadow: 0 26px 60px rgba(8, 47, 73, 0.22);
+    }
+
+    .about h3 {
+      color: var(--navy);
+      font-size: clamp(1.7rem, 2vw, 2.3rem);
+      margin-bottom: 16px;
+    }
+
+    .about p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 1.02rem;
+    }
+
+    .facts {
+      background: linear-gradient(180deg, rgba(224,242,254,0.8), rgba(224,242,254,0.92));
+    }
+
+    .fact-grid {
+      width: min(1100px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .fact-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 32px 26px;
+      text-align: center;
+      border-radius: 22px;
+      box-shadow: 0 18px 35px rgba(8, 47, 73, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(14, 165, 233, 0.08);
+      animation: riseIn 0.8s ease both;
+    }
+
+    .fact-card:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .fact-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .fact-card:hover {
+      transform: translateY(-10px) rotateX(2deg);
+      box-shadow: 0 24px 40px rgba(8, 47, 73, 0.12);
+    }
+
+    .fact-card .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      font-size: 2.5rem;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.18), rgba(14,165,233,0.1));
+      animation: pulse 3.5s ease-in-out infinite;
+    }
+
+    .fact-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
+    .fact-card p {
+      color: var(--muted);
+    }
+
+    .conservation {
+      width: min(900px, 100%);
+      margin: auto;
+      text-align: center;
+    }
+
+    .conservation p {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 1.08rem;
+    }
+
+    .progress {
+      height: 16px;
+      background: #d6eaf4;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 24px 0 8px;
+      box-shadow: inset 0 2px 10px rgba(8,47,73,0.08);
+    }
+
+    .progress-bar {
+      width: 72%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #0369a1);
+      border-radius: inherit;
+      position: relative;
+      animation: barGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+      transform: translateX(-120%);
+      animation: shimmer 2.8s infinite;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .protect-box {
+      width: min(980px, 100%);
+      margin: 42px auto 0;
+      padding: 36px 28px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(2,132,199,0.08), rgba(255,255,255,0.88));
+      border: 1px solid rgba(14, 165, 233, 0.12);
+      box-shadow: 0 18px 38px rgba(8, 47, 73, 0.06);
+    }
+
+    .protect-box h3 {
+      color: var(--navy);
+      margin-bottom: 12px;
+      font-size: clamp(1.7rem, 2vw, 2.3rem);
+    }
+
+    .protect-box p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 5%;
+      background: linear-gradient(180deg, #082f49, #071f33);
+      color: #c9edff;
+      letter-spacing: 0.02em;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    @keyframes float {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(0,-24px,0) scale(1.04); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    @keyframes barGlow {
+      0% { box-shadow: inset 0 0 0 rgba(255,255,255,0); }
+      100% { box-shadow: inset 0 0 16px rgba(255,255,255,0.2); }
+    }
+
+    @media (max-width: 760px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+        margin-top: 20vh;
+      }
+
+      .about,
+      .fact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 70px 5%;
+      }
+
+      .about img {
+        min-height: 250px;
+      }
+
+      .protect-box {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="home">
+    <nav>
+      <div class="logo">TEMAN<span>EMOH</span></div>
+
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#facts">Facts</a></li>
+        <li><a href="#protect">Protect</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero">
+      <h1>Beruang-beruang putih sigma.</h1>
+      <p>
+        Emoh katanya menjadi singgah ke rumah saya untuk beristirahat tetapi malah keterusan.
+      </p>
+      <a class="button" href="#about">Temukan lebih lanjut</a>
+    </div>
+
+    <div class="scroll-note">↓ Scroll aja</div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="section-title">
+        <h2>Ini salah satu temen Emoh</h2>
+        <p>Predator puncak di ekosistem tundra.
+          gambarnya muncul gak?
+        </p>
+      </div>
+
+      <div class="about">
+        <div class="about-visual">
+          <img
+            src=""
+            alt="Polar bear standing on Arctic ice"
+          />
+        </div>
+
+        <div>
+          <h3>Apasih si beruang gembrot itu?</h3>
+          <p>
+            Beruang kutub bernama ilmiah Ursus maritimus. 
+            Mereka adalah mamalia karnivora besar yang hidup
+            di wilayah Arktik. Mereka adalah predator puncak dan makan terutama anjing laut. Beruang kutub berburu 
+            dengan menunggu di dekat lubang pernapasan anjing laut di es laut.
+            Makanya beruang-beruang kutub putih itu gendut dan gembrot.
+          </p>
+          <p>
+            Beruang kutub penting dalam ekosistem Arktik sebagai predator puncak, 
+            membantu menjaga keseimbangan populasi mangsanya.
+          </p>
+          <a class="button" href="#protect">Donasi buat si Emoh gembrot</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="facts" class="facts">
+      <div class="section-title">
+        <h2>Kata si Emoh</h2>
+        <p>oashsaudhsaidisdish aowkwkowakowk.</p>
+      </div>
+
+      
+
+
+  <footer>
+    <p><strong>TemanEmoh</strong> — Jangan rusaki habitat si Emoh.</p>
+  </footer>
+</body>
+</html>
